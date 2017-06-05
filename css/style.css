@@ -1,7 +1,13 @@
 body{
   font-family:"Dosis",Arial,sans-serif;
-  background-color:black;
+  background-color:#000000;
 } 
+footer{
+  color:#FFFFFF;
+  text-align:right;
+  font-size:12px;
+  margin-right:20px;
+}
 #map{
   margin:0 auto;
   width:100%;
@@ -10,9 +16,9 @@ body{
   justify-content:center;
 }
 svg{
-  border:1px solid black;
+  border:1px solid #43BCFF;
   background-color:white;
-  border-radius:20px;
+  border-radius:10px;
 }
 .state{
   fill:none;

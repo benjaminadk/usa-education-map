@@ -17,12 +17,6 @@ var svg = d3.select("#map")
         .attr('height', height + margin.top + margin.bottom)
         .attr("width", width + margin.left + margin.right);
 
-//BUILD INITIAL TOOLTIP
-var tooltip = body.append("div")
-                  .attr("class","tooltip")
-                  .attr("id","tooltip")
-                  .style("opacity",0);
-
 //GET JSON
 d3.queue()
 .defer(d3.json, COUNTY_URL)
@@ -53,6 +47,14 @@ var bDPMax = d3.max(bachelorDegP);
  //DEFINE COUNTIES FROM DATA 
   var counties = topojson.feature(data1,data1.objects.counties).features;
   
+  //BUILD INITIAL TOOLTIP
+var tooltip = body.append("div")
+                  .attr("class","tooltip")
+                  .attr("id","tooltip")
+                  .style("opacity",0);
+                  
+  
+  //BUILD OUR MAP
    svg.append("g")
   .attr('class','counties')
   .selectAll('path')
@@ -62,7 +64,7 @@ var bDPMax = d3.max(bachelorDegP);
   .attr('class','county')
   .attr('d',path)
   .attr("data-fips",function(d){return d.id;})
-  .attr('data-bdp',function(d){
+  .attr('data-education',function(d){
     var result = dataEd.filter(function(obj){
      return obj.fips == d.id;});
      return result[0].bachelorsOrHigher;})
@@ -115,6 +117,14 @@ var title = svg.append("text")
           .style("font-size","30px")
           .style("font-weight", "bold")
           .text("US Bachelor's Degree Frequency: % By County");
+  
+var description = svg.append("text")
+                     .attr("x",450)
+                     .attr("y",598)
+                     .attr("text-anchor","middle")
+                     .attr("id","description")
+                     .style("font-size","14px")
+                     .text("*Hover your mouse over any county in America to see the percentage of adults that have a bachelor's degree");
 
 
 //ATTEMPT VERTICAL LEGEND
